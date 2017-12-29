@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Scherre Stein Papier</title>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-title" content="Scherre Stein Papier">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Memeory">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+    <style>
+
+
+    body {
+      text-align: center;
+      background-color: #2ecc71;
+      color: #fcfcfc;
+      margin: 4px;
+      font-family: 'Bungee', cursive;
+    }
+
+    h1 {
+      font-size: 23px;
+      margin: 15px 0px;
+    }
+
+    label {
+      display: inline-block;
+
+    }
+
+    input {
+      display: none;
+    }
+    input + img {
+        border: 6px solid #ccc;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #fff;
+        cursor: pointer;
+        display: block;
+        margin: 10px 6px;
+    }
+    input:checked + img {
+      border-color:  #2980b9;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    button {
+      font-family: 'Bungee', cursive;
+      background-color: #3498db;
+      color: #ffffff;
+      padding: 5px 15px;
+      border: 6px solid #ccc;
+      display: block;
+      margin: 20px auto 0;
+      border-radius: 5px;
+      font-size: 25px;
+      outline: none;
+
+    }
+
+    #textBox {
+      position: absolute;
+      top: 50%;
+      background-color: #3498dc;
+      padding: 15px;
+      width: 80%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      box-shadow: -1px 2px 6px 6px rgba(0, 0, 0, 0.10196078431372549);
+
+    }
+
+    #textBox span {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      background-color: #fff;
+      color: #000;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+
+    }
+
+    </style>
+
+  </head>
+  <base href="">
+  <body class="dev">
+
+
+<h1>Scherre Stein Papier</h1>
+<p>Was wählst du?</p>
+
+<form id="form">
+  <div>
+  <label>
+    <input type="radio" name="choice" value="0" checked> Scherre
+    <img src="Scherre.svg" width="100">
+  </label>
+  <label>
+  <input type="radio" name="choice" value="1"> Stein
+  <img src="Stein.svg" width="100">
+  </label>
+  <label>
+  <input type="radio" name="choice" value="2"> Papier
+  <img src="Papier.svg" width="100">
+  </label>
+</div>
+<button type="submit" >Spielen</button>
+
+
+
+</form>
+
+
+<div id="textBox" class="hide">
+  <span id="close">×</span>
+  <div class="text">
+
+  </div>
+</div>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.js"></script>
+
+
+    <script>
+    $( document ).ready(function() {
+
+
+
+$("#form").on("submit", function(e){
+  e.preventDefault()
+
+
+  var values = $(this).serialize();
+  benutzerwahlIndex = values.split("=", -1)[1];
+
+
+
+  optionen= ["Scherre","Stein","Papier"]
+  computerWahl = Math.floor((Math.random()*3))
+
+
+
+  endResultat=optionen[benutzerwahlIndex] +" gegen "+optionen[computerWahl]+":<br /> "
+
+  if (benutzerwahlIndex == computerWahl) {
+    endResultat = endResultat+" Gleichstand"
+  }else if (benutzerwahlIndex>computerWahl){
+
+    if(benutzerwahlIndex == 2  &&  computerWahl == 0){
+      endResultat = endResultat+" Du hast verloren"
+    }else{
+      endResultat = endResultat+" Du hast gewonnen!"
+    }
+  }else {
+    if(benutzerwahlIndex == 0  &&  computerWahl == 2){
+        endResultat = endResultat+" Du hast gewonnen!"
+    }else{
+      endResultat = endResultat+" Du hast verloren"
+    }
+  }
+
+  $("#textBox .text").html(endResultat);
+  $("#textBox").fadeIn();
+
+  $("#close").on("click", function(){
+    $("#textBox").fadeOut();
+  });
+
+
+});
+
+
+
+
+//var benutzerwahl = prompt("Was wählst du?", "");
+
+//var benutzerwahlIndex = optionen.indexOf(benutzerwahl);
+
+/*
+console.log(benutzerwahlIndex);
+
+console.log(optionen[computerWahl]);
+*/
+
+
+
+
+
+
+/*
+    vergleichnummer=1000
+
+    i=0
+    j=41
+    multiplicator=15
+    total =i*j
+
+    if(total > vergleichnummer){
+    alert(total+" ist grösser als "+vergleichnummer)
+    }else {
+    alert(total+" ist kleiner als "+vergleichnummer)
+    }
+    for (i; i < j; i++) {
+      console.log(i+"x"+multiplicator+"="+i*multiplicator);
+    }
+
+*/
+
+
+
+
+    });
+
+    </script>
+
+  </body>
+</html>
